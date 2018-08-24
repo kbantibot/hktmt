@@ -1,0 +1,29 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center"> 활동자랑대회 </h1><br>
+
+<p id="act">
+<button type="button" class="btn btn-outline-secondary" onclick="location.href='/activity/new'">글쓰기</button>
+</p>
+
+
+<% @activities.each do |p| %>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>제목</th>
+            <th><a href="/activity/show/<%= p.id %>"><%= p.title %></a></th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>내용</td>
+          <td><%= p.content %></td>
+        </tr>
+      </tbody>
+    </table><br>
+
+
+<% end %>
+

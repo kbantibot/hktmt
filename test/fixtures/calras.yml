@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rice: 1
+  noodle: 1
+  fork: 1
+  soju: 1
+  beer: 1
+
+two:
+  rice: 1
+  noodle: 1
+  fork: 1
+  soju: 1
+  beer: 1

@@ -1,0 +1,107 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" > 음식/술 계산기</h1>
+
+<h2 align="center">한 끼 식사에 필요한 밥, 라면, 돼지고기 그리고 술에 대해 계산합니다. </h2> <br>
+
+<p align="center">
+     
+     <% if @bab =="bab" %>
+       <label>밥 <input type="checkbox" name="food1" id="food1" value="bab" checked disabled> </input> </label>
+     <% else %>
+       <label>밥 <input type="checkbox" name="food1" id="food1" value="bab" unchecked disabled> </input> </label>
+     <% end %>
+     <% if @noodle =="noodle" %>
+       <label>라면 <input type="checkbox" name="food1" id="food2" value="noodle" checked disabled> </input> </label>
+     <% else %>
+       <label>라면 <input type="checkbox" name="food1" id="food2" value="noodle" unchecked disabled> </input> </label>
+     <% end %>
+     <% if @fork =="fork" %>
+       <label> 돼지고기  <input type="checkbox" name="food1" id="food3" value="fork" checked disabled> </input> </label>
+     <% else %>
+       <label> 돼지고기  <input type="checkbox" name="food1" id="food3" value="fork" unchecked disabled> </input> </label>
+     <% end %><br>
+     
+     명수: 남자 <input type="number" name="mt_male_num" min="0" value="<%= @male_num %>" disabled> 명 </input> 
+     여자 <input type ="number" name="mt_female_num" min="0" value="<%= @female_num %>" disabled> 명 </input> 
+     <br><br>
+</p> 
+
+<p align="center">
+    <% if @amount == "hard" %>
+    <select name="amount" disabled>
+         <option name="amount1" value="hard" selected> 주당모임</option>
+         <option name= "amount2" value="normal"> 평범 </option>
+         <option name= "amount3" value="easy"> 알쓰모임</option>
+    <% elsif @amount == "normal" %>
+     <select name="amount" disabled>
+         <option name="amount1" value="hard"> 주당모임</option>
+         <option name= "amount2" value="normal" selected> 평범 </option>
+         <option name= "amount3" value="easy"> 알쓰모임</option>
+     </select>
+    <% else @amount == "easy" %>
+     <select name="amount" disabled>
+         <option name="amount1" value="hard"> 주당모임</option>
+         <option name= "amount2" value="normal"> 평범 </option>
+         <option name= "amount3" value="easy" selected> 알쓰모임</option>
+     </select>
+     <% end %>
+</p>
+ 
+<p align="center">   
+
+     <% if @soju == "soju" %>
+      <label>소주 <input type="checkbox" name="drink1" id="drink1" value="soju" checked disabled> </input> </label>
+     <% else %>
+      <label>소주 <input type="checkbox" name="drink1" id="drink1" value="soju" unchecked disabled> </input> </label>
+     <% end %>
+     <% if @beer == "beer" %>
+      <label>맥주 <input type="checkbox" name="drink2" id="drink2" value="beer" checked disabled > </input> </label> 
+     <% else %>
+      <label>맥주 <input type="checkbox" name="drink2" id="drink2" value="beer" unchecked disabled > </input> 
+     <% end %> <br>
+
+
+ 명수: <input type="number" value="<%= @sum_num %>" disabled> </input> 명
+</p>
+
+ <hr>
+ 
+ <form id="hide" data-remote="true" align="center">  
+ <p id = "h1" align="center">
+  햇반은 <%= @num_rice %>개, 라면은 <%= @num_noodle %>개, 돼지고기는 <%= @num_fork %>근을 구매하세요. <br>
+  소주는 <%= @num_soju %>개 (1병 기준), 맥주는 <%= @num_beer %>개 (한 피쳐 기준)를 구매하세요.  <br>
+  음식의 가격은 약 <%= 1500 * @num_rice + 700 * @num_noodle + 10000 * @num_fork %>원 , 술의 가격은 약 <%= 1200 * @num_soju + 5000 * @num_beer %>원 입니다. <br>
+  예상 총 금액은 약 <%= 1500 * @num_rice + 700 * @num_noodle + 10000 * @num_fork + 1200 * @num_soju + 5000 * @num_beer  %> 원 입니다.<br>
+ <button class ="btn1"action="/post/calu/<%=@post.id%>">다시 계산하기!</button>
+ <button class ="btn2">완료!</button>
+ <button class ="btn3">홈으로!</button>
+ </form>  
+<script>
+$(document).ready(function(){
+    $(".btn1").click(function(){
+        $(location).attr('href', '/post/calu/<%=@post.id%>')
+        
+    });
+    $(".btn2").click(function(){
+       
+        $.ajax({
+          method: "get",   
+          url: "/post/calu_result/<%= @post.id %>/place/gogo", 
+          data: {rice: <%= @num_rice %>,
+                 noodle: <%= @num_noodle %>,
+                 fork: <%= @num_fork %>,
+                 soju: <%= @num_soju %>,
+                 beer: <%= @num_beer %>
+          } 
+        }).done(function( msg ) {
+          alert( "저 장" );
+        });
+        
+    });
+    $(".btn3").click(function(){
+        $(location).attr('href', '/post/index')
+        
+    });
+});
+</script>

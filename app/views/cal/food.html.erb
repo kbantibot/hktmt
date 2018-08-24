@@ -1,0 +1,24 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center"> 음식 계산기 </h1>
+
+<h2 align="center"> 돼지고기, 밥, 라면에 대해 계산합니다. </h2>
+
+ <form action="/cal/food_result/<%= @post.id %>" align="center">   
+ <label>밥 <input type="checkbox" name="food1" value="rice" > </input> </label>
+ <label>라면 <input type="checkbox" name="food2" value="noodle" > </input> </label>
+ <label> 돼지고기  <input type="checkbox" name="food3" value="meat" checked> </input> </label> <br><br>
+ # 혹시 몰라서 그대로 둠 <br><br>
+ 
+ 명수: 남자<input type="number" name="mt_male_num" min="0" value="<%= @post.num_male %>">명, </input> 
+ 여자 <input type ="number" name="mt_female_num" min="0" value="<%= @post.num_female %>">명 </input> &nbsp;&nbsp; <br><br>
+ 
+ 
+ <input type="submit" value="계산" align="center" >
+ </form>  
+
+ 
+ 
+
+
+

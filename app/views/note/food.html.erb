@@ -1,0 +1,31 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" > 음식자랑대회 </h1><br>
+
+
+<p id="food">
+    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/food/new'">글쓰기</button>
+</p>
+
+<% @foods.each do |p| %>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>제목</th>
+            <th><a href="/food/show/<%= p.id %>"><%= p.title %></a></th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>내용</td>
+          <td><%= p.content %></td>
+        </tr>
+      </tbody>
+    </table><br>
+
+
+<% end %>
+
+
+

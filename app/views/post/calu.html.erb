@@ -1,0 +1,78 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" > 음식/술 계산기 : <%= @a %> </h1>
+
+<h2 align="center">한 끼 식사에 필요한 밥, 라면, 돼지고기 그리고 술에 대해 계산합니다. </h2> <br>
+
+<p align="center">
+    
+
+<table>
+    <thead>
+        <tr>
+          <th>음식</th>
+        </tr>
+    <thead>
+        
+        <tbody>
+         <tr>
+             <td>
+                    <form class="form-inline" action = "/post/calu_result/<%= @post.id %>" >
+    
+                        <fieldset style = "width:200" >
+    
+                               <label>밥 <input type="checkbox" name="food1" id="food1" value="bab"> </label>
+                               <label>라면 <input type="checkbox" name="food2" id="food2" value="noodle"> </label>
+                               <label> 돼지고기  <input type="checkbox" name="food3" id="food3" value="fork" checked> </label> <br>
+     
+                                 남자 <input class="form-control" type="number" name="male_num" min="0" value="<%= @post.num_male %>"> 명 </input>
+                                 &
+                                 여자 <input class="form-control" type ="number" name="female_num" min="0" value="<%= @post.num_female %>"> 명 </input> 
+                         </fieldset>
+                    </form>
+            </td>
+        <tr>
+     </tbody>
+</table><br>
+
+<table>
+    <thead>
+        <tr>
+            <th>술</th>
+        </tr>
+    <thead>
+        
+        <tbody>
+         <tr>
+             <td>
+                    <form class="form-inline" action = "/post/calu_result/<%= @post.id %>" >
+    
+                        <fieldset style = "width:200" >
+                                
+                                  <label>소주 <input class="form-control" type="checkbox" name="drink1" id="drink1" value="soju" checked > </input> </label>
+                                  <label>맥주 <input class="form-control" type="checkbox" name="drink2" id="drink2" value="beer" > </input> </label>
+
+                                    <select class="form-control" name="amount">
+                                        <option class="form-control" value="hard" > 주당모임</option>
+                                        <option class="form-control" value="normal"> 평범 </option>
+                                        <option class="form-control" value="easy"> 알쓰모임</option> 
+                                    </select><br><br>
+                                <p>
+                                  음주명수: <input class="form-control" type="number" name="sum_num" value="<%= (@post.num_male + @post.num_female) %>"> </input> 명
+                                </p>
+                                
+                        </fieldset>
+                    </form>
+            </td>
+        <tr>
+     </tbody>
+</table><br>
+
+
+<form class="form-inline" action = "/post/calu_result/<%= @post.id %>" >
+     <fieldset style = "width:200" >
+             <p align="center">
+                  <input class="form-control" type="submit" value="전체계산" >    
+            </p>
+    </fieldset>
+</form>

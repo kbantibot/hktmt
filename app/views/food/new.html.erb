@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet"> 
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" >음식자랑대회</h1><br>
+
+<form class="form-inline" role="form" action="/food/create" method ="post" enctype="multipart/form-data"> 
+ <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+ 
+ <fieldset style = "width:200" >
+ 
+  제목: <br><input class="form-control" type = "string" name = "food_title" required/><br><br>
+  내용: <br><textarea class="form-control" name="food_content" rows="4" cols="80" placeholder ="재료, 만드는 법, 음식에 얽힌 재밌는 일화 등 다양한 이야기를 공유해주세요!" ></textarea> <br><br><br>
+
+<p style="text-align:center" >
+  사진첨부: <input type ="file" name = "image" > <br><br>
+</p>
+ 
+<p style="text-align:center" >
+  <input class="form-control" type= "submit" value = "작성">
+</p> 
+
+ </fieldset>
+ 
+</form>
+

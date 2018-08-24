@@ -1,0 +1,75 @@
+<!-- var t 는 음식의 가격 -->
+<script>
+    $(document).ready(function(){
+        $("#hide").hide();
+        $("#h1").hide();
+        $("#btn1").click(function(){
+            
+            var t = $("#nm")
+            t = Number(t)
+            
+            $("#hide").show();
+            $("#bab").val(t);
+        });
+        $("#food1").click(function(){
+            $("#h1").toggle();
+        });
+
+  
+    //     $("#btn2").click(function(){
+          
+    //         $.ajax({
+    //           method: "get",   
+    //           url: "/post/calu/<%= @post.id %>/calulator/index", 
+    //           data: {tt_name: $("input[name=tt_name]").val(),tt_date: $("select[name=tt_date]").val(),tt_start: $("select[name=tt_start]").val(),tt_fin: $("select[name=tt_fin]").val() } 
+    //         }).done(function( msg ) {
+    //           alert( "저 장" );
+    //         });
+    //      });
+    });
+</script>
+
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" > 음식/술 계산기 </h1>
+
+<h2 align="center"> 돼지고기, 밥, 라면 그리고 술에 대해 계산합니다. </h2> <br>
+
+ <p align="center">
+  
+     명수: 남자<input type="number" name="mt_male_num" min="0" value="<%= @post.num_male %>">명, </input> 
+     여자 <input type ="number" name="mt_female_num" min="0" value="<%= @post.num_female %>">명 </input> &nbsp;&nbsp; 
+     <br><br>
+     
+     <label>밥 <input type="checkbox" name="food1" id="food1" value="rice" > </input> </label>
+     <label>라면 <input type="checkbox" name="food2" id="food2" value="noodle" > </input> </label>
+     <label> 돼지고기  <input type="checkbox" name="food3" id="food3" value="meat" checked> </input> </label><br>
+</p> 
+
+<p align="center">
+     <select name="amount">
+         <option value="hard"> 주당모임</option>
+         <option value="normal"> 평범 </option>
+         <option value="easy"> 알쓰모임</option>
+     </select>    
+ </p>
+ 
+ <p align="center">   
+ <label>소주 <input type="checkbox" name="soju" id="soju" checked > </input> </label>
+ <label>맥주 <input type="checkbox" name="beer" id="beer" > </input> </label> <br>
+ 
+ 명수: <input type="number" value="<%= (@post.num_male + @post.num_female) %>"> </input> 명
+ </p>
+ 
+ <p align="center">
+ <button id="btn1" >계산</button>
+ </p>
+ 
+ <form id="hide" data-remote="true" align="center">  
+ <p id = "h1" align="center">돼지고기는 -근, 햇반은 -개, 라면은<%= (@post.num_male)*3 %>개를 구매하세요. <br>
+  음식의 가격은 <input type="integer" name="bab" id="bab" >, 술의 가격은 <input type="text" name="sul" id="sul" >입니다. </p> 
+  
+ <p align="center">
+     <button id="btn2">저장하기</button>
+ </p>
+ </form>  

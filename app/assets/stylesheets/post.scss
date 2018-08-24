@@ -1,0 +1,64 @@
+// Place all the styles related to the post controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// 메인 & 엠티만들기
+body {
+    background-color: white;
+    font-family: 'Jua', sans-serif;
+}
+
+a:link, a:visited { 
+    color: black; 
+    text-decoration: none;
+}
+    
+    
+a:hover { 
+    color: black; 
+    text-decoration: underline;
+
+}
+
+#pic1 {
+    width: 500px;
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+#pic2 {
+    width: 450px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#h1-2 {
+    text-align: center;
+    margin : 20px;
+ 
+}
+
+#main {
+    text-align:center;
+    margin: 20px;
+    
+}
+
+
+form {
+    
+}
+
+fieldset {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+

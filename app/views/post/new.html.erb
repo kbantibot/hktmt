@@ -1,0 +1,54 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" >엠티 만들기</h1><br>
+
+
+<form class="form-inline" role="form" action = "/post/create" name = "mt_info" method = "post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+            <fieldset style = "width:200" >
+             
+                   엠티 이름 : <br><input class="form-control" type = "text" name = "mt_title" required/><br><br>
+                   엠티 간단 설명 : <br><textarea class="form-control" name="mt_content" rows="8" cols="80"></textarea>
+                   <br><br>
+
+                   인원 : 남자<input class="form-control" type = "number" name = "mt_male_num" min="0" required/>명 &nbsp
+                          여자<input class="form-control" type = "number" name = "mt_female_num" min="0" required/>명 <br><br>
+                   1인당 금액 : <input class="form-control" type = "string" name = "mt_money" required/>원<br><br>
+                   
+                   일정 :
+                    <select class="form-control" name = "mt_date">
+                        <option value = "1">1박 2일</option>
+                        <option value = "2">2박 3일</option>
+                        <option value = "3">3박 4일</option>
+                    </select>
+                    <select class="form-control" name = "mt_start">
+                        <option value = "9">9시</option>
+                        <option value = "10">10시</option>
+                        <option value = "11">11시</option>
+                        <option value = "12">12시</option>
+                        <option value = "13">13시</option>
+                        <option value = "14">14시</option>
+                        <option value = "15">15시</option>
+                        <option value = "16">16시</option>
+                        <option value = "17">17시</option>
+                    </select>
+                    ~
+                    <select class="form-control" name = "mt_fin">
+                        <option value = "9">9시</option>
+                        <option value = "10">10시</option>
+                        <option value = "11">11시</option>
+                        <option value = "12">12시</option>
+                        <option value = "13">13시</option>
+                        <option value = "14">14시</option>
+                        <option value = "15">15시</option>
+                        <option value = "16">16시</option>
+                        <option value = "17">17시</option>
+                    </select>
+                    <br><br><br>
+                <p style="text-align:center" >
+                   <input  class="form-control" type = "submit" value = "제출"/>&nbsp&nbsp
+                   <input  class="form-control" type = "reset" value = "초기화"/><br><br>
+                </p>
+            </fieldset> 
+</form>

@@ -1,0 +1,18 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center" > 술 계산기 </h1>
+
+<form action='/cal/drink_show' method='get' align="center">
+ <select name="amount">
+     <option value="hard"> 주당모임</option>
+     <option value="normal"> 평범 </option>
+     <option value="easy"> 알쓰모임</option>
+ </select>    
+    
+ <label>소주 <input type="checkbox" name="soju" checked align="center"> </input> </label>
+ <label>맥주 <input type="checkbox" name="beer" align="center" > </input> </label> <br><br>
+ 
+ 명수: <input type="number" value="<%= @post_all %>"align="center"> </input> 명 <br>
+ 
+ <input type="submit" value="계산" min="0"align="center"> </input> 
+</form>

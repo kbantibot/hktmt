@@ -1,0 +1,123 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+<h1 align="center">장소찾기</h1><br>
+<p class ="info" align="center">현재 찾은 장소 정보!
+<% if @aa != 0 %>
+    <%=@plval.place %>
+    <%=@plval.plname %>
+    <%=@plval.price %>
+<% end %>
+</p>
+<form class="form-inline" role="form" enctype="multipart/form-data" method ="get">
+ <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+ <fieldset style = "width:200" >
+     <p>
+    장소 :
+    <select class="form-control" name="place" action="/pl/index/">
+
+        <option vaule ="blank">장소선택</option>
+        <option vaule ="가평">가평</option>
+        <option value ="서울">서울</option>
+        <option value ="인천">인천</option>
+    </select>
+
+    날짜 :
+    <select class="form-control" name="month">
+        <option value="01">1월</option>
+        <option value="02">2월</option>
+        <option value="03">3월</option>
+        <option value="04">4월</option>
+        <option value="05">5월</option>
+        <option value="06">6월</option>
+        <option value="07">7월</option>
+        <option value="08">8월</option>
+        <option value="09">9월</option>
+        <option value="10">10월</option>
+        <option value="11">11월</option>
+        <option value="12">12월</option>
+    </select> 
+    <select class="form-control" name="date">
+        <option value="01">1일</option><option value="02">2일</option><option value="03">3일</option><option value="04">4일</option><option value="05">5일</option>
+        <option value="06">6일</option><option value="07">7일</option><option value="08">8일</option><option value="09">9일</option><option value="10">10일</option>
+        <option value="11">11일</option><option value="12">12일</option><option value="13">13일</option><option value="14">14일</option><option value="15">15일</option>
+        <option value="16">16일</option><option value="17">17일</option><option value="18">18일</option><option value="19">19일</option><option value="20">20일</option>
+        <option value="21">21일</option><option value="22">22일</option><option value="23">23일</option><option value="24">24일</option><option value="25">25일</option>
+        <option value="26">26일</option><option value="27">27일</option><option value="28">28일</option><option value="29">29일</option><option value="30">30일</option><option value="31">31일</option>
+    
+    </select> 
+     부터 <%=@post.date%>박 <%=(@post.date+1)%>일 
+    
+    명수 : <input class="form-control" type= "integer" name="people">
+
+     </p>
+
+     
+    
+    <p align="center">
+    <input class="form-control" type="submit" value="검색하기">
+    </p>
+
+ </fieldset>
+</form>
+
+<p align="center">
+현재 검색 내역 장소: <%=@pl.place%> <%=@pl.month%>월 <%=@pl.date%>일 <%=@pl.people%>명
+</p>
+
+
+
+<br>
+<% i=1 %>
+<table align="center">
+    <thead>
+        <tr>
+            <th></th>
+            <th>팬션 이름</th>
+            <th>가격</th>
+        </tr>
+    </thead>
+    <% if @pl.place !="blank" %>
+<% @notices.each do |x|%>
+        <tr>
+            <th><%= i %></th>
+            <th class="a<%=i%>" ><%= x[:title] %></th>
+            <th class="b<%=i%>"><%= x[:price] %></th>
+            <th class="c<%=i%>"><a class="d<%=i%>" href="<%= x[:href] %>">자세히보기</a></th>
+
+            <th><button id="<%=i%>">선택</button></th>
+        </tr>
+    <% i=i+1 %>
+<% end %>
+    <%end%>
+</table> 
+
+<br>
+<br>
+<br>
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var t= $(this).attr('id');
+        $(".info").text("현재 찾은 장소 정보! "+"<%=@pl.place %>"+$(".a"+t).text()+$(".b"+t).text());
+        $.ajax({
+          method: "get",   
+          url: "/post/index/<%= @post.id %>/place/create", 
+          data: {place: "<%=@pl.place %>",
+                 date: <%=@pl.date %>,
+                 month: <%=@pl.month %>,
+                 plname: $(".a"+t).text(),
+                 price: $(".b"+t).text(),
+                 href: $(".d"+t).attr('href')
+          } 
+        }).done(function( msg ) {
+          alert( "저 장" );
+        });
+      
+      
+
+    });
+});
+    
+    
+</script>

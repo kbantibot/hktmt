@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  prize: 1
+  bab: 1
+  sul: 1
+
+two:
+  name: MyText
+  prize: 1
+  bab: 1
+  sul: 1

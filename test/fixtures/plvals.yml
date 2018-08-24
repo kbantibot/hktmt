@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  place: MyString
+  month: 1
+  date: 1
+  people: 1
+  plname: MyString
+  price: MyString
+  href: MyString
+
+two:
+  place: MyString
+  month: 1
+  date: 1
+  people: 1
+  plname: MyString
+  price: MyString
+  href: MyString

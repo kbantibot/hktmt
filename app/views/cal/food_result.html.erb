@@ -1,0 +1,18 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center"> 음식 계산기 </h1>
+
+<h2 align="center"> 돼지고기, 밥, 라면에 대해 계산합니다. </h2><br>
+
+ <p align="center">
+ 명수: 남자 <input type="number" name="mt_male_num" min="0" value="<%= @male %>" disabled/>명, </input> 
+ 여자 <input type ="number" name="mt_female_num" min="0" value="<%= @female %>" disabled/>명 </input> &nbsp;&nbsp; <br><br>
+ 
+ 돼지고기 <%= @male  %> 인분, 햇반 <%= @result_rice %> 개, 라면 <%= @result_noodle %>개를 사가보세요. <br>
+ 
+ 약 <%= @result_price %>원이 들 것으로 예상됩니다. <br>
+ (* 낱개로 계산한 가격으로 실제보다 높게 책정될 수 있습니다.)
+ 
+ </p>
+ 
+ 

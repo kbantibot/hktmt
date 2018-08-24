@@ -1,0 +1,23 @@
+<img id="pic1" src="/assets/sample.jpg"><br>
+
+<h1 align="center">음식자랑대회</h1><br>
+
+<form class="form-inline" action="/food/update/<%= @food.id %>" method ="post"> 
+ <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+<fieldset style = "width:150"> 
+
+ 제목: <input  class="form-control" type = "string" name = "food_title" value="<%= @food.title %>"required/><br><br>
+ 내용: <textarea  class="form-control" type = "text" name = "food_content" rows="8" cols="80"><%= @food.content %></textarea> <br><br><br>
+ 
+ 
+<p align="center"> 
+사진첨부: <input class="form-control" type ="file" name = "image" value="<%= @food.image.url %>"> <br><br>
+</p> 
+ 
+<p align="center"> 
+ <input class="form-control" type= "submit" value = "수정">
+</p> 
+ 
+<fieldset>
+</form>

@@ -1,0 +1,103 @@
+<img id="pic2" src="/assets/sample.jpg"><br><br>
+
+<h1 align="center">총정리</h1>
+
+<p align="center">엠티이름:<%=@post.title%><br></p>
+<%if @c3 != 0%>
+<%=@plval.month%>월 <%=@plval.date %>일 <%=@post.start%>시 부터 <%=@post.fin%>시 까지 총<%=@post.date%>박<%=(@post.date+1)%>일 <%=(@post.num_female+@post.num_male)%>명
+<% end %>
+</p>
+<br>
+
+<p align="center">엠티설명:<%=@post.content%>
+<% if @c2 != 0 %>
+장소:<%=@plval.place %> <br>
+이름:<%=@plval.plname %><br>
+가격:<%=@plval.price %> <br>
+링크:<%=@plval.href%> <br><br><br>
+<% else %>
+장소 찾고오세요
+<% end %>
+</p>
+<br><br>
+
+<p align="center">음식:
+<%if @c3 != 0%>
+햇반은 <%= @calra.rice %>개, 라면은 <%= @calra.noodle %>개, 돼지고기는 <%= @calra.fork %>근을 구매하세요. <br>
+  소주는 <%= @calra.soju %>개 (1병 기준), 맥주는 <%= @calra.beer %>개 (한 피쳐 기준)를 구매하세요.  <br>
+  음식의 가격은 약 <%= 1500 * @calra.rice + 700 * @calra.noodle + 10000 * @calra.fork %>원 , 술의 가격은 약 <%= 1200 * @calra.soju + 5000 * @calra.beer %>원 입니다. <br>
+  예상 총 금액은 약 <%= 1500 * @calra.rice + 700 * @calra.noodle + 10000 * @calra.fork + 1200 * @calra.soju + 5000 * @calra.beer  %> 원 입니다.<br>
+<% else %>
+음식 계산하고 오세요!
+<% end %>
+</p>
+<br><br>
+
+<p align="center">
+일정:
+<%if @c1 != 0%>
+    <script>
+        var t = <%= @post.date %>;
+    function rowsp(m) {
+              $(".gubun" + m).each(function () {
+                  var rows = $(".gubun" + m + ":contains('" + $(this).text() + "')");
+                  if (rows.length > 1) {
+                      rows.eq(0).attr("rowspan", rows.length);
+                      rows.not(":eq(0)").remove();
+                  }
+              });
+          }
+    
+     function ttmake(){
+      document.write("<table id =\"forRowspan\"> <tr> <th></th><th>1일차</th><th>2일차</th>");
+      if(t == 2 || t===3){
+      document.write("<th>3일차</th>");
+      }
+      if(t==3){
+        document.write("<th>4일차</th>");
+      }
+      document.write("</tr>");
+      for(var i=1;i<25;i++){
+        document.write("<tr><td>"+ i +"시</td>");
+       for(var j=1; j<t+2; j++){
+         document.write("<td  id=\"a"+j+i+"\"></td>" );
+       }
+       document.write("</tr>");
+     }
+    
+      document.write("</table>");
+      
+     }
+     
+     function ttroad(){
+      var m= 1000
+    <% @ttmakings.each do |c| %>
+       m++
+          var z = <%= c.tt_date %>;
+          var r = <%= c.tt_start %>;
+          var d = <%= c.tt_fin %>;
+          var y = d-r;
+          
+            if(y == 0){
+              $("#a"+z+r).text('<%= c.tt_name %>');
+    
+            }
+            else{
+              for(var k =d;k>r-1;k--){
+                $("#a"+z+k).text('<%= c.tt_name %>').addClass("gubun" + m);
+              }
+              rowsp(m);
+            }
+     
+    <% end %>
+    }
+    </script>
+    
+    <script>
+      ttmake();
+      ttroad();
+     </script>
+<% else %>
+시간표를짜고 오세요!
+<% end %>
+</p>

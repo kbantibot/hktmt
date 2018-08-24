@@ -1,0 +1,174 @@
+<script>
+var t = <%= @post.date %>;
+function rowsp(m) {
+          $(".gubun" + m).each(function () {
+              var rows = $(".gubun" + m + ":contains('" + $(this).text() + "')");
+              if (rows.length > 1) {
+                  rows.eq(0).attr("rowspan", rows.length);
+                  rows.not(":eq(0)").remove();
+              }
+          });
+      }
+
+ function ttmake(){
+  document.write("<table id =\"forRowspan\"> <tr> <th></th><th>1일차</th><th>2일차</th>");
+  if(t == 2 || t===3){
+  document.write("<th>3일차</th>");
+  }
+  if(t==3){
+    document.write("<th>4일차</th>");
+  }
+  document.write("</tr>");
+  for(var i=1;i<25;i++){
+    document.write("<tr><td>"+ i +"시</td>");
+   for(var j=1; j<t+2; j++){
+     document.write("<td  id=\"a"+j+i+"\"></td>" );
+   }
+   document.write("</tr>");
+ }
+
+  document.write("</table>");
+  
+ }
+ 
+ function ttroad(){
+  var m= 1000
+<% @ttmakings.each do |c| %>
+   m++
+      var z = <%= c.tt_date %>;
+      var r = <%= c.tt_start %>;
+      var d = <%= c.tt_fin %>;
+      var y = d-r;
+      
+        if(y == 0){
+          $("#a"+z+r).text('<%= c.tt_name %>').append("<a href=\"/post/time/<%= @post.id%>/ttmaking/destroy/<%= c.id%>\" data-confirm=\'댓글을 삭제합니다.\'>[삭제]</a>");
+
+        }
+        else{
+          for(var k =d;k>r-1;k--){
+            $("#a"+z+k).text('<%= c.tt_name %>').addClass("gubun" + m).append("<a href=\"/post/time/<%= @post.id%>/ttmaking/destroy/<%= c.id%>\" data-confirm=\'댓글을 삭제합니다.\'>[삭제]</a>");
+          }
+          rowsp(m);
+        }
+ 
+<% end %>
+}
+      
+
+$(document).ready(function(){
+  var gumsa = new Array(t);
+      for (var i = 0; i < t+2; i++) {
+          gumsa[i] = new Array(25);
+      }
+      <% @ttmakings.each do |c| %>
+        for(var k =<%= c.tt_start %>;k<=<%= c.tt_fin %>;k++){
+              gumsa[<%= c.tt_date %>][k]=1;
+            }
+      <% end %>
+  var m=0;
+  
+    $("button").click(function(){
+      if($("#tt_start").val() <=  $("#tt_fin").val()){
+      var p=0;
+      for(var k = $("#tt_start").val() ; k<= $("#tt_fin").val();k++){
+        if(gumsa[$("#tt_date").val()][k] == 1){
+          p++;
+          
+        }
+      }
+      if(p==0){
+        for(var k = $("#tt_start").val() ; k<= $("#tt_fin").val();k++){
+        gumsa[$("#tt_date").val()][k] = 1;
+      }
+      m++;
+      var z = $("#tt_date").val();
+      var r = $("#tt_start").val();
+      var d = $("#tt_fin").val();
+      var y = d-r;
+        if(y == 0){
+          $("#a"+z+r).text($("#tt_name").val());
+
+        }
+        else{
+          for(var k =d;k>r-1;k--){
+            $("#a"+z+k).text($("#tt_name").val()).addClass("gubun" + m);
+          }
+          rowsp(m);
+        }
+        $.ajax({
+          method: "get",   
+          url: "/post/time/<%= @post.id %>/ttmaking/create", 
+          data: {tt_name: $("input[name=tt_name]").val(),tt_date: $("select[name=tt_date]").val(),tt_start: $("select[name=tt_start]").val(),tt_fin: $("select[name=tt_fin]").val() } 
+        }).done(function( msg ) {
+          alert( "저 장" );
+        });
+      }
+      else{
+        alert("오류:같은시간에 다른일정이있어요");
+      }
+      }
+      else{
+        alert("오류:시작시간이 더 커요");
+      }
+
+    });
+});
+
+</script>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+
+</style>
+</head>
+<body>
+  <img id="pic2" src="/assets/sample.jpg"><br><br>
+  <% @ttmakings.each do |c| %>
+      <%= c.tt_date %>   <%= c.tt_start %> ~ <%= c.tt_fin %> <%= c.tt_name%> 
+      <a href="/post/time/<%= @post.id%>/ttmaking/destroy/<%= c.id%>" data-confirm='댓글을 삭제합니다.'>[시간표삭제]</a>
+       <br>
+  <% end %>
+  <script>
+  ttmake();
+  ttroad();
+  </script><br><br>
+<form  class="form-inline" role="form" data-remote="true">
+  <fieldset style = "width:200" >
+<p>일정 이름: <input class="form-control" type="text" name="tt_name" id="tt_name" ><br>
+<br>
+일정 시간:
+
+  <select class="form-control" id = "tt_date" name="tt_date">
+    <script>
+    for(var i=1; i<t+2; i++){
+      document.write("<option value = \""+i+"\">"+i+"일차</option>" );
+    }
+    </script>
+  </select>
+  <select class="form-control" id = "tt_start" name="tt_start">
+    <script>
+    for(var i=1; i<25; i++){
+      document.write("<option value = \""+i+"\">"+i+"시</option>" );
+    }
+    </script>
+  </select>
+~
+<select class="form-control" id = "tt_fin" name="tt_fin">
+  <script>
+  for(var i=1; i<25; i++){
+    document.write("<option value = \""+i+"\">"+i+"시</option>" );
+  }
+    </script>
+</select>
+</p><br>
+
+ <p align="center">
+ <button class="form-control" >입력 완료</button>
+ </p>
+
+</fieldset>
+</form>
+
+
+</body>
