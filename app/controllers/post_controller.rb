@@ -31,7 +31,7 @@ class PostController < ApplicationController
     @amount = params[:amount] 
     
     # 가격
-    @a = 0
+     @a = 0
     if @bab == "bab"
      @a = @a + 1 
     end
@@ -45,8 +45,10 @@ class PostController < ApplicationController
     end
     
     
-        
-    if @a == 100 #고기만 선택
+    if @a <20
+     redirect_to '/post/calu_angry' 
+     
+    elsif @a == 100 #고기만 선택
      @num_rice = 0
      @num_noodle = 0
      
@@ -80,7 +82,7 @@ class PostController < ApplicationController
      @num_fork = (400 * @male_f  + 300 * @female_f)/600
      @num_fork = @num_fork.ceil
     
-    elsif @a = 111 
+    elsif @a == 111 
      @male_f = @male_num.to_f
      @female_f = @female_num.to_f
      
@@ -93,8 +95,6 @@ class PostController < ApplicationController
      @num_fork = (400 * @male_f + 300 * @female_f)/600
      @num_fork = @num_fork.ceil
      
-    else @a <20
-     redirect_to '/post/calu_angry' 
     end
     
     @b = 0
@@ -138,12 +138,12 @@ class PostController < ApplicationController
      elsif @b == 10 #소주만 선택
       @num_beer = 0
       
-      @sum_num = @sum_num.to_f
-      @sum_num = @sum_num.to_f
+      @sum_num = @sum_num.to_i
+      @sum_num = @sum_num.to_i
       @num_soju = @sum_num * 1
       
      else @b = 11 
-      @sum_num = @sum_num.to_f     
+      @sum_num = @sum_num.to_i    
          
       @num_soju = 3 * @sum_num 
       @num_soju = @num_soju / 7
